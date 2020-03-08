@@ -143,26 +143,26 @@ def load_feature(feature_path: str, train: bool):
 
 
 def get_data(data_path: str, feature_path: str, train: bool):
-    # if (train == True):
-    #     files = get_data_path(data_path)
-    #     max_, min_ = get_max_min(files)
-    #     mfcc_data = []
-    #     i = 0
-    #     for file in files:
-    #         i = i + 1
-    #         label = file.split("-")[2]
-    #         print("LABEL & NUMBER OF FILES :", label, i)
-    #         print("label mapping:", Config.CLASS_LABELS_MAP[label])
-    #         label = Config.CLASS_LABELS_MAP[label]
-    #         features = extract_features(file, max_)
-    #         mfcc_data.append([file, features, Config.CLASS_LABELS.index(label)])
-    #
-    # else:
-    #     features = extract_features(data_path)
-    #     mfcc_data = [[data_path, features, -1]]
-    #
-    # cols = ['file_name', 'features', 'emotion']
-    # mfcc_pd = pd.DataFrame(data=mfcc_data, columns=cols)
-    # pickle.dump(mfcc_data, open(feature_path, 'wb'))
+    if (train == True):
+        files = get_data_path(data_path)
+        max_, min_ = get_max_min(files)
+        mfcc_data = []
+        i = 0
+        for file in files:
+            i = i + 1
+            label = file.split("-")[2]
+            print("LABEL & NUMBER OF FILES :", label, i)
+            print("label mapping:", Config.CLASS_LABELS_MAP[label])
+            label = Config.CLASS_LABELS_MAP[label]
+            features = extract_features(file, max_)
+            mfcc_data.append([file, features, Config.CLASS_LABELS.index(label)])
+
+    else:
+        features = extract_features(data_path)
+        mfcc_data = [[data_path, features, -1]]
+
+    cols = ['file_name', 'features', 'emotion']
+    mfcc_pd = pd.DataFrame(data=mfcc_data, columns=cols)
+    pickle.dump(mfcc_data, open(feature_path, 'wb'))
 
     return load_feature(feature_path, train=train)
