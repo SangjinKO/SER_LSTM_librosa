@@ -26,7 +26,7 @@ def Train(save_model_name: str):
 
     model.train(x_train, y_train, x_test, y_val, n_epochs = Config.epochs)
     print("END Training")
-    #model.evaluate(x_test, y_test) #Need to check out
+    #model.evaluate(x_test, y_test)
     model.save_model(save_model_name)
 
     return model
